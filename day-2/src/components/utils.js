@@ -24,9 +24,9 @@ let getMoviesBySearchTerm = async (myKey, title) => {
   url.searchParams.append("t", title);
   let response = await fetch(url);
   let data = await response.json();
-  let string = JSON.stringify(data);
-  app.innerHTML = string;
-  // return data;
+  // let string = JSON.stringify(data);
+  // app.innerHTML = string;
+  return data;
 };
 
 let getMovieDetailsById = async (myKey, id) => {
@@ -34,9 +34,9 @@ let getMovieDetailsById = async (myKey, id) => {
   url.searchParams.append("i", id);
   let response = await fetch(url);
   let data = await response.json();
-  let string = JSON.stringify(data);
-  app.innerHTML = string;
-  // return data;
+  // let string = JSON.stringify(data);
+  // app.innerHTML = string;
+  return data;
 };
 
 function load(event) {
