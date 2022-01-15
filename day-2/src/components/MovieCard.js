@@ -1,9 +1,22 @@
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { getMovieDetailsById } from "./utils";
+import { getMoviesBySearchTerm } from "./utils";
+const MovieCard = () => {
+  let [tempMovie, setTempMovie] = useState([]);
 
-const MovieCard = ({ title, type, posterUrl }) => {
+  useEffect(async () => {
+    let tempData = await getMovieDetailsById("b8b4d73a", "tt3896198");
+    setTempMovie(tempData);
+  }, []);
+
+  let poster = tempMovie.Poster;
+  let title = tempMovie.Title;
+  let type = tempMovie.Type;
+
   return (
     <div>
-      <img src={posterUrl}></img>
+      <img src={poster}></img>
       <p>{title}</p>
       <div>
         <p>{type}</p>

@@ -1,7 +1,4 @@
 // import "./styles.css";
-
-let app = document.getElementById("app");
-let form1 = document.querySelector("#form1");
 const url = new URL("https://www.omdbapi.com");
 
 ////-------------------------------------------Using promises and .then
@@ -19,24 +16,22 @@ const url = new URL("https://www.omdbapi.com");
 
 //-----------------------------------------------Using Async and Await
 
-let getMoviesBySearchTerm = async (myKey, title) => {
-  url.searchParams.append("apikey", myKey);
-  url.searchParams.append("t", title);
-  let response = await fetch(url);
-  let data = await response.json();
-  // let string = JSON.stringify(data);
-  // app.innerHTML = string;
-  return data;
+const fetchJSON = async (url) => {
+  const response = await fetch(url)
+    .then((res) => res.json())
+    .then((data) => data)
+    .catch((err) => console.clear.log(err));
+  return response;
 };
 
-let getMovieDetailsById = async (myKey, id) => {
-  url.searchParams.append("apikey", myKey);
-  url.searchParams.append("i", id);
-  let response = await fetch(url);
-  let data = await response.json();
-  // let string = JSON.stringify(data);
-  // app.innerHTML = string;
-  return data;
+export const getMoviesBySearchTerm = async (myKey, title) => {
+  let url = `https://www.omdbapi.com/?apikey=${myKey}&t=${title}`;
+  return fetchJSON(url);
+};
+
+export const getMovieDetailsById = async (myKey, id) => {
+  let url = `https://www.omdbapi.com/?apikey=${myKey}&i=${id}`;
+  return fetchJSON(url);
 };
 
 function load(event) {
@@ -46,11 +41,3 @@ function load(event) {
   let id = event.target[2].value;
   id ? getMovieDetailsById(key, id) : getMoviesBySearchTerm(key, title);
 }
-
-form1.addEventListener("submit", (event) => {
-  load(event);
-});
-
-export default getMoviesBySearchTerm;
-export default getMovieDetailsById;
-export default load;
