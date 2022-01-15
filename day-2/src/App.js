@@ -4,12 +4,13 @@ import MovieCard from "./components/MovieCard";
 import SearchMovie from "./components/Form";
 import { getMoviesBySearchTerm } from "./components/utils";
 import { getMoviesById } from "./components/utils";
+import { HomePage } from "./components/HomePage";
 
 function App() {
   return (
     <>
       <SearchMovie />
-      <MovieCard />
+      <HomePage />
     </>
   );
 }
