@@ -1,18 +1,13 @@
-import { useState } from "react";
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { getMovieDetailsById } from "./utils";
+import { getMoviesBySearchTerm } from "./utils";
+import { onSubmit } from "./utils";
 
 const SearchMovie = ({ onSearch }) => {
   const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [apiId, setApiId] = useState("");
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    onSearch({ id, title, apiId });
-
-    setId("");
-    setTitle("");
-    setApiId("");
-  };
 
   return (
     <form onSubmit={onSubmit}>

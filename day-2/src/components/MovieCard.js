@@ -1,7 +1,3 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import { getMovieDetailsById } from "./utils";
-import { getMoviesBySearchTerm } from "./utils";
 const MovieCard = ({ poster, title, type }) => {
   return (
     <div>

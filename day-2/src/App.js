@@ -6,6 +6,10 @@ import { getMoviesBySearchTerm } from "./components/utils";
 import { getMoviesById } from "./components/utils";
 import { HomePage } from "./components/HomePage";
 
+{
+  /* <AddTask onAdd={addTask} /> */
+}
+
 function App() {
   return (
     <>

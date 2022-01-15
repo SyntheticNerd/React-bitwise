@@ -1,6 +1,8 @@
 // import "./styles.css";
 const url = new URL("https://www.omdbapi.com");
 
+const movieArray = [];
+
 ////-------------------------------------------Using promises and .then
 
 // let getMoviesBySearchTerm = (myKey, title) => {
@@ -24,20 +26,38 @@ const fetchJSON = async (url) => {
   return response;
 };
 
-export const getMoviesBySearchTerm = async (myKey, title) => {
+export const getMoviesBySearchTerm = (myKey, title) => {
   let url = `https://www.omdbapi.com/?apikey=${myKey}&t=${title}`;
   return fetchJSON(url);
 };
 
-export const getMovieDetailsById = async (myKey, id) => {
+export const getMovieDetailsById = (myKey, id) => {
   let url = `https://www.omdbapi.com/?apikey=${myKey}&i=${id}`;
   return fetchJSON(url);
 };
 
-function load(event) {
-  event.preventDefault();
-  let key = event.target[0].value;
-  let title = event.target[1].value;
-  let id = event.target[2].value;
-  id ? getMovieDetailsById(key, id) : getMoviesBySearchTerm(key, title);
-}
+export const getMovies = () => {
+  return movieArray;
+};
+
+export const onSubmit = async (e) => {
+  e.preventDefault();
+  let _apiId = e.target[0].value;
+  let _title = e.target[1].value;
+  let _id = e.target[2].value;
+
+  let data = !_apiId
+    ? alert("Must have a Valid API ID")
+    : _id
+    ? await getMovieDetailsById(_apiId, _id)
+    : _title
+    ? await getMoviesBySearchTerm(_apiId, _title)
+    : alert("Must have a valid Search Value");
+
+  movieArray.push(data);
+  console.log(movieArray);
+
+  e.target[0].value = "";
+  e.target[1].value = "";
+  e.target[2].value = "";
+};
