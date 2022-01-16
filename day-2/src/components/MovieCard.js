@@ -6,18 +6,21 @@ const MovieCard = ({ poster, title, type, data }) => {
 
   if (data.Title) {
     return (
-      <div>
-        <img src={poster} alt='No Poster Available'></img>
-        <p>{title}</p>
-        <div>
-          <p>{type}</p>
+      <div id='movieCard'>
+        <img id='posterImg' src={poster} alt='No Poster Available'></img>
+        <div id='cardTitleRow'>
+          <p id='titleText'>{title}</p>
+          <p id='movieType'>{type}</p>
         </div>
-        <label for='moreDetails'>More Details</label>
-        <input
-          id='moreDetails'
-          type='checkbox'
-          onChange={(e) => setIsOpen(e.target.checked)}
-        />
+        <div id='detailsBtn'>
+          <label for='moreDetails'>Details</label>
+          <input
+            id='moreDetails'
+            type='checkbox'
+            onChange={(e) => setIsOpen(e.target.checked)}
+          />
+        </div>
+
         <MoreDetails data={data} isOpen={isOpen} />
       </div>
     );

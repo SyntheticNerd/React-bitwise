@@ -39,8 +39,8 @@ const SearchMovie = ({ onSearch }) => {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <div>
+      <form id='searchBar' onSubmit={onSubmit}>
+        <div id='searchField'>
           <label>API ID</label>
           <input
             type='text'
@@ -49,7 +49,7 @@ const SearchMovie = ({ onSearch }) => {
             onChange={(e) => setApiId(e.target.value)}
           />
         </div>
-        <div>
+        <div id='searchField'>
           <label>Movie Title</label>
           <input
             type='text'
@@ -58,7 +58,7 @@ const SearchMovie = ({ onSearch }) => {
             onChange={(e) => setSearchTitle(e.target.value)}
           />
         </div>
-        <div>
+        <div id='searchField'>
           <label>Movie ID</label>
           <input
             type='text'
