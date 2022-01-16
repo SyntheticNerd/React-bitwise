@@ -1,13 +1,29 @@
-const MovieCard = ({ poster, title, type }) => {
-  return (
-    <div>
-      <img src={poster}></img>
-      <p>{title}</p>
+import { useState } from "react";
+import { MoreDetails } from "./MoreDetails";
+
+const MovieCard = ({ poster, title, type, data }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (data.Title) {
+    return (
       <div>
-        <p>{type}</p>
+        <img src={poster} alt='No Poster Available'></img>
+        <p>{title}</p>
+        <div>
+          <p>{type}</p>
+        </div>
+        <label for='moreDetails'>More Details</label>
+        <input
+          id='moreDetails'
+          type='checkbox'
+          onChange={(e) => setIsOpen(e.target.checked)}
+        />
+        <MoreDetails data={data} isOpen={isOpen} />
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <p>Try Searching for Something</p>;
+  }
 };
 
 MovieCard.defaultProps = {

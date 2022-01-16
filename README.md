@@ -1,5 +1,11 @@
 # React Course By Bitwise
 
+To start applications:
+
+### `npm start`
+
+Each day has its own react app.
+
 ## Contents
 
 - [Day-1](#day1)
