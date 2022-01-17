@@ -24,7 +24,7 @@ const fetchJSON = async (url) => {
 };
 
 export const getMoviesBySearchTerm = (myKey, title) => {
-  let url = `https://www.omdbapi.com/?apikey=${myKey}&t=${title}`;
+  let url = `https://www.omdbapi.com/?apikey=${myKey}&s=${title}`;
   return fetchJSON(url);
 };
 

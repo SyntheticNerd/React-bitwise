@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getMovieDetailsById } from "./utils";
 import { getMoviesBySearchTerm } from "./utils";
+import { SearchResults } from "./SearchResults";
 import MovieCard from "./MovieCard";
 
 const SearchMovie = ({ onSearch }) => {
@@ -27,7 +28,7 @@ const SearchMovie = ({ onSearch }) => {
       ? await getMoviesBySearchTerm(_apiId, _title)
       : alert("Must have a valid Search Value");
 
-    console.log(data);
+    // console.log(data);
     setData(data);
     setTitle(data.Title);
     setType(data.Type);
@@ -70,7 +71,8 @@ const SearchMovie = ({ onSearch }) => {
 
         <input type='submit' value='Search' className='btn btn-block' />
       </form>
-      <MovieCard poster={poster} title={title} type={type} data={data} />
+      <SearchResults data={data} apiId={apiId} />
+      {/* <MovieCard poster={poster} title={title} type={type} data={data} /> */}
     </>
   );
 };
