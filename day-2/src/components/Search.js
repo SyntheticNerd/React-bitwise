@@ -3,78 +3,47 @@ import { getMovieDetailsById } from "./utils";
 import { getMoviesBySearchTerm } from "./utils";
 import { SearchResults } from "./SearchResults";
 import MovieCard from "./MovieCard";
+import { getApiId } from "./variables";
 
-const SearchMovie = ({ onSearch }) => {
-  const [apiId, setApiId] = useState("");
-  const [id, setId] = useState("");
+const Search = ({ setSearching, setSearchData }) => {
   const [searchTitle, setSearchTitle] = useState("");
-
-  const [type, setType] = useState("");
-  const [title, setTitle] = useState("");
-  const [poster, setPoster] = useState("");
-  const [data, setData] = useState([]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    let _apiId = e.target[0].value;
-    let _title = e.target[1].value;
-    let _id = e.target[2].value;
+    let _searchString = e.target[0].value;
+    let data = {};
 
-    let data = !_apiId
-      ? alert("Must have a Valid API ID")
-      : _id
-      ? await getMovieDetailsById(_apiId, _id)
-      : _title
-      ? await getMoviesBySearchTerm(_apiId, _title)
-      : alert("Must have a valid Search Value");
+    if (_searchString.length) {
+      data = await getMoviesBySearchTerm(getApiId(), _searchString);
+      setSearching(true);
+    } else {
+      setSearching(false);
+      e.target[0].value = "";
+    }
 
     // console.log(data);
-    setData(data);
-    setTitle(data.Title);
-    setType(data.Type);
-    setPoster(data.Poster);
+    setSearchData(data);
     e.target[0].value = "";
-    e.target[1].value = "";
-    e.target[2].value = "";
+    // setData(data);
   };
 
   return (
     <>
       <form id='searchBar' onSubmit={onSubmit}>
         <div id='searchField'>
-          <label>API ID</label>
+          <label>Search</label>
           <input
             type='text'
-            placeholder='API ID'
-            value={apiId}
-            onChange={(e) => setApiId(e.target.value)}
-          />
-        </div>
-        <div id='searchField'>
-          <label>Movie Title</label>
-          <input
-            type='text'
-            placeholder='Title'
+            placeholder='Search Here'
             value={searchTitle}
             onChange={(e) => setSearchTitle(e.target.value)}
-          />
-        </div>
-        <div id='searchField'>
-          <label>Movie ID</label>
-          <input
-            type='text'
-            placeholder='ID'
-            value={id}
-            onChange={(e) => setId(e.target.value)}
           />
         </div>
 
         <input type='submit' value='Search' className='btn btn-block' />
       </form>
-      <SearchResults data={data} apiId={apiId} />
-      {/* <MovieCard poster={poster} title={title} type={type} data={data} /> */}
     </>
   );
 };
 
-export default SearchMovie;
+export default Search;

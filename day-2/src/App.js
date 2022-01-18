@@ -1,11 +1,25 @@
 import "./App.css";
-import SearchMovie from "./components/Search";
+import Search from "./components/Search";
+import LogIn from "./components/LogIn";
+import { SearchResults } from "./components/SearchResults";
+import { useState, useEffect } from "react";
+import { getApiId } from "./components/variables";
 
 function App() {
+  const [login, setLogin] = useState(false);
+  const [searching, setSearching] = useState(false);
+  const [searchData, setSearchData] = useState({});
+
   return (
     <>
-      <SearchMovie />
-      {/* <HomePage /> */}
+      {/*--------------Login Screen--------------------*/}
+      {!login ? (
+        <LogIn setLogin={setLogin} />
+      ) : (
+        <Search setSearching={setSearching} setSearchData={setSearchData} />
+      )}
+      {/*--------------Display Search Results--------------------*/}
+      {searching ? <SearchResults searchData={searchData} /> : <></>}
     </>
   );
 }

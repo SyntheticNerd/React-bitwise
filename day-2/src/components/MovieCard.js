@@ -5,7 +5,6 @@ const MovieCard = ({ poster, title, type, data }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   if (data.Title) {
-    console.log("making movies");
     return (
       <div id='movieCard'>
         <img id='posterImg' src={poster} alt='No Poster Available'></img>
@@ -23,8 +22,6 @@ const MovieCard = ({ poster, title, type, data }) => {
             />
           </div>
         </div>
-
-        <MoreDetails data={data} isOpen={isOpen} />
       </div>
     );
   } else {

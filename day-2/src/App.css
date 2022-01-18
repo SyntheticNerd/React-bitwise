@@ -1,3 +1,6 @@
+#root {
+  height: 100vh;
+}
 #searchBar {
   display: flex;
   width: 50vw;
@@ -75,4 +78,14 @@
   height: auto;
   position: relative;
   bottom: 0px;
+}
+#logInBlock {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#logInForm {
+  display: flex;
+  flex-direction: column;
 }
