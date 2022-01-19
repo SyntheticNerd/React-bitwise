@@ -1,16 +1,10 @@
 #root {
   height: 100vh;
 }
-#searchBar {
-  display: flex;
-  width: 50vw;
-  margin: 32px;
-  justify-content: space-around;
-}
 
 #movieCard {
   position: relative;
-  width: 150px;
+  /* width: 800px; */
   margin: 32px;
   padding: 16px;
   display: flex;
@@ -69,23 +63,10 @@
   justify-content: space-between;
   align-items: center;
 }
-#searchArray {
-  display: flex;
-  flex-wrap: wrap;
-}
+
 #movieInfo {
   width: 100%;
   height: auto;
   position: relative;
   bottom: 0px;
-}
-#logInBlock {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#logInForm {
-  display: flex;
-  flex-direction: column;
 }

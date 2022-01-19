@@ -4,9 +4,9 @@ import { MoreDetails } from "./MoreDetails";
 const MovieCard = ({ poster, title, type, data }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  if (data.Title) {
+  if (data) {
     return (
-      <div id='movieCard'>
+      <div id={`search${data.imdbID}`}>
         <img id='posterImg' src={poster} alt='No Poster Available'></img>
         <div id='movieInfo'>
           <div id='cardTitleRow'>

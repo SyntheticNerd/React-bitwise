@@ -5,7 +5,14 @@ import { SearchResults } from "./SearchResults";
 import MovieCard from "./MovieCard";
 import { getApiId } from "./variables";
 
-const Search = ({ setSearching, setSearchData }) => {
+const searchBar = {
+  display: "flex",
+  width: "50vw",
+  margin: "32px",
+  justifyContent: "space-around",
+};
+
+const Search = ({ setSearching, setSearchData, setSearchString }) => {
   const [searchTitle, setSearchTitle] = useState("");
 
   const onSubmit = async (e) => {
@@ -14,6 +21,7 @@ const Search = ({ setSearching, setSearchData }) => {
     let data = {};
 
     if (_searchString.length) {
+      setSearchString(_searchString);
       data = await getMoviesBySearchTerm(getApiId(), _searchString);
       setSearching(true);
     } else {
@@ -29,7 +37,7 @@ const Search = ({ setSearching, setSearchData }) => {
 
   return (
     <>
-      <form id='searchBar' onSubmit={onSubmit}>
+      <form id='searchBar' style={searchBar} onSubmit={onSubmit}>
         <div id='searchField'>
           <label>Search</label>
           <input

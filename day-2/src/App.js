@@ -9,6 +9,7 @@ function App() {
   const [login, setLogin] = useState(false);
   const [searching, setSearching] = useState(false);
   const [searchData, setSearchData] = useState({});
+  const [searchString, setSearchString] = useState("");
 
   return (
     <>
@@ -16,10 +17,18 @@ function App() {
       {!login ? (
         <LogIn setLogin={setLogin} />
       ) : (
-        <Search setSearching={setSearching} setSearchData={setSearchData} />
+        <Search
+          setSearching={setSearching}
+          setSearchData={setSearchData}
+          setSearchString={setSearchString}
+        />
       )}
       {/*--------------Display Search Results--------------------*/}
-      {searching ? <SearchResults searchData={searchData} /> : <></>}
+      {searching ? (
+        <SearchResults searchData={searchData} searchString={searchString} />
+      ) : (
+        <></>
+      )}
     </>
   );
 }
