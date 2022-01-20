@@ -14,7 +14,7 @@ const searchBar = {
   textAlign: "center",
 };
 
-const Search = ({ setSearching, setSearchData, setSearchString }) => {
+const Search = ({ setSearching, setSearchData, setSearchString, setError }) => {
   const [searchTitle, setSearchTitle] = useState("");
 
   const onSubmit = async (e) => {
@@ -25,15 +25,22 @@ const Search = ({ setSearching, setSearchData, setSearchString }) => {
     if (_searchString.length) {
       setSearchString(_searchString);
       data = await getMoviesBySearchTerm(getApiId(), _searchString);
-      setSearching(true);
+      if (data.Response === "True") {
+        setSearchData(data);
+        e.target[0].value = "";
+        setSearching(true);
+      } else {
+        setError(data.Error);
+        setSearching(false);
+        e.target[0].value = "";
+      }
     } else {
       setSearching(false);
       e.target[0].value = "";
     }
 
     // console.log(data);
-    setSearchData(data);
-    e.target[0].value = "";
+
     // setData(data);
   };
 

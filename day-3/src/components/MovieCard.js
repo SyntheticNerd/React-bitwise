@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { getMovieDetailsById } from "./utils";
+import { getApiId } from "./variables";
 
 let movieCardStyle = {
   display: "block",
@@ -12,15 +14,27 @@ let posterStyle = {
 };
 let briefStyle = {};
 
-const MovieCard = ({ poster, title, type, data, setClickedDetails }) => {
+const MovieCard = ({
+  poster,
+  title,
+  type,
+  data,
+  setClickedDetails,
+  setError,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [oldData, setOldData] = useState({});
 
-  const openDetails = async () => {
-    data = await getMoviesBySearchTerm(getApiId(), _searchString);
-  };
-
   if (data) {
+    const openDetails = async (data) => {
+      let detailData = await getMovieDetailsById(getApiId(), data.imdbID);
+      if (detailData.Response === "True") {
+        setClickedDetails(detailData);
+        // console.log(detailData);
+      } else {
+        setError(detailData.Error);
+      }
+    };
     return (
       <div id={`search${data.imdbID}`} style={movieCardStyle}>
         <img
@@ -40,7 +54,7 @@ const MovieCard = ({ poster, title, type, data, setClickedDetails }) => {
               id='moreDetails'
               type='button'
               onClick={() => {
-                setClickedDetails(data);
+                openDetails(data);
               }}
             />
           </div>

@@ -10,7 +10,9 @@ const searchArrayStyle = {
   // flexWrap: "wrap",
 };
 
-export const SearchResults = ({ searchData, searchString }) => {
+const detailsClicked = (data) => {};
+
+export const SearchResults = ({ searchData, searchString, setError }) => {
   let searchArr = [];
   const [clickedDetails, setClickedDetails] = useState({});
   const [detailsOpen, setDetailsOpen] = useState(false);
@@ -36,10 +38,15 @@ export const SearchResults = ({ searchData, searchString }) => {
             type={data.Type}
             data={data}
             setClickedDetails={setClickedDetails}
+            setError={setError}
           />
         ))}
       </div>
-      <DetailsMenu data={clickedDetails} />
+      {clickedDetails.Response === "True" ? (
+        <DetailsMenu data={clickedDetails} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
